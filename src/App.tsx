@@ -7,7 +7,7 @@ export default function App() {
     </div>
   );
 }
-export default App;
+
 
 
 
