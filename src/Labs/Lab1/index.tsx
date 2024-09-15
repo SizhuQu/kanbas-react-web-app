@@ -59,8 +59,65 @@ render the gaps.
 					<li>Cook for 45 minutes until the meat is tender and sauce is thick</li>
 					{/* recipe from internet */}
 				</ol>
+				<h5>Unordered List Tag</h5>
+				My favorite books (in no particular order)
+				<ul id="wd-my-books">
+					<li>Dune</li>
+					<li>Lord of the Rings</li>
+					<li>Ender's Game</li>
+					<li>Red Mars</li>
+					<li>The Forever War</li>
+				</ul>
+				Your favorite books (in no particular order)
+				<ul id="wd-your-books">
+					<li>The Lord of The Ring</li>
+					<li>Back to the Future</li>
+					<li>Zhen Huan Zhuan</li>
+					<li>Ling Mei</li>
+				</ul>
+
 
 			</div>
+			<div id="wd-tables">
+				<h4>Table Tag</h4>
+				<table border={1} width="100%">
+					<thead>
+						<tr>
+							<th>Quiz</th>
+							<th>Topic</th>
+							<th>Date</th>
+							<th>Grade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Q1</td>
+							<td>HTML</td>
+							<td>2/3/21</td>
+							<td>85</td>
+						</tr>
+						<tr>
+							<td>Q2</td>
+							<td>CSS</td>
+							<td>2/10/21</td>
+							<td>90</td>
+						</tr>
+						<tr>
+							<td>Q3</td>
+							<td>JavaScript</td>
+							<td>2/17/21</td>
+							<td>95</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colSpan={3}>Average</td>
+							<td>90</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+
 		</div>
     );
   }
