@@ -138,6 +138,7 @@ render the gaps.
 			<div id="wd-forms">
 				<h4>Form Elements</h4>
 				<form id="wd-text-fields">
+
 					<h5>Text Fields</h5>
 					<label htmlFor="wd-text-fields-username">Username:</label>
 					<input id="wd-text-fields-username" placeholder="jdoe" /> <br />
@@ -149,6 +150,7 @@ render the gaps.
 					<label htmlFor="wd-text-fields-last-name">Last name:</label>
 					<input type="text" id="wd-text-fields-last-name" placeholder="Doe"
 					value="Wonderland" title="The last name" />
+
 					<h5>Text boxes</h5>
 					<label>Biography:</label><br/>
 					<textarea id="wd-textarea" cols={30} rows={10}>Lorem ipsum dolor sit amet, 
@@ -159,14 +161,17 @@ render the gaps.
 					pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
 					officia deserunt mollit anim id est laborum.
 					</textarea>
+
 					<h5 id="wd-buttons">Buttons</h5>
 					<button id="wd-all-good" onClick={() => alert("Life is Good!")} type="button">
 					Hello World!
 					</button>
+
 					<h5>File upload</h5>
 					<input id="wd-upload" type="file"/>
-					<h5 id="wd-radio-buttons">Radio buttons</h5>
 
+
+					<h5 id="wd-radio-buttons">Radio buttons</h5>
 					<label>Favorite movie genre:</label><br />
 
 					<input type="radio" name="radio-genre" id="wd-radio-comedy"/>
@@ -180,6 +185,7 @@ render the gaps.
 
 					<input type="radio" name="radio-genre" id="wd-radio-fantasy"/>
 					<label htmlFor="wd-radio-fantasy">Fantasy</label>
+
 
 					<h5 id="wd-checkboxes">Checkboxes</h5>
 					<label>Favorite movie genre:</label><br/>
