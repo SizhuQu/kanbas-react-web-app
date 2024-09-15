@@ -50,6 +50,16 @@ render the gaps.
 					<li>Flip and cook the other side.</li>
 					<li>Serve and enjoy!</li>
 				</ol>
+				My favorite recipe:
+				<ol id="wd-your-favorite-recipe">
+					<li>Cut pork belly into cubes</li>
+					<li>Blanch the pork belly in boiling water</li>
+					<li>Stir-fry sugar until caramelized, then add pork belly</li>
+					<li>Add soy sauce, cooking wine, and water, then simmer</li>
+					<li>Cook for 45 minutes until the meat is tender and sauce is thick</li>
+					{/* recipe from internet */}
+				</ol>
+
 			</div>
 		</div>
     );
