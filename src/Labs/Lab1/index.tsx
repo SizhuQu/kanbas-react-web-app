@@ -50,7 +50,7 @@ render the gaps.
 					<li>Flip and cook the other side.</li>
 					<li>Serve and enjoy!</li>
 				</ol>
-				My favorite recipe:
+				My favorite recipe for braised pork belly:
 				<ol id="wd-your-favorite-recipe">
 					<li>Cut pork belly into cubes</li>
 					<li>Blanch the pork belly in boiling water</li>
