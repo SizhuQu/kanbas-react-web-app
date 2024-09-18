@@ -1,8 +1,9 @@
 import { useState } from "react";
 export default function Modules() {
-    const [isCollapsed, isAlreadyCollapsed] = useState(false);
-    const expandCollapse = () => { isAlreadyCollapsed(!isCollapsed); };
-    const collapse = isCollapsed ? "collapsed" : "";
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const expandCollapse = () => { 
+        setIsCollapsed(!isCollapsed); 
+      };
 
     return (
       <div>
