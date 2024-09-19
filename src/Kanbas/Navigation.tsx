@@ -19,6 +19,15 @@ export default function KanbasNavigation() {
         <li><Link to="/Kanbas/Inbox" id="wd-inbox-link">Inbox</Link></li>
         <li><Link to="/Labs" id="wd-labs-link">Labs</Link></li>
       </ul>
+
+      <p><strong>Name: Sizhu Qu</strong></p>
+      <p><strong>Section: 02 </strong>Web Development - Fall 2024 </p>
+
+      <h3><strong>GitHub Repository:</strong></h3>
+        <ul>
+          <li><a href="https://github.com/SizhuQu/kanbas-react-web-app.git" target="_blank" rel="noopener noreferrer">kanbas-react-web-app</a></li>
+        </ul>
     </div>
+
   );
 }
