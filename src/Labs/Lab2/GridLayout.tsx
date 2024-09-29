@@ -1,14 +1,16 @@
 export default function GridLayout() {
     return (
-        <div id="wd-css-grid-layout">
-            <div id="wd-css-left-right-layout">
-                <h2>Grid layout</h2>
-                <div className="wd-grid-row">
-                    <div className="wd-grid-col-half-page wd-bg-color-yellow">
-                        <h3>Left half</h3>
-                    </div>
-                    <div className="wd-grid-col-half-page wd-bg-color-blue wd-fg-color-white">
-                        <h3>Right half</h3>
+        <div>
+            <div id="wd-css-grid-layout">
+                <div id="wd-css-left-right-layout">
+                    <h2>Grid layout</h2>
+                    <div className="wd-grid-row">
+                        <div className="wd-grid-col-half-page wd-bg-color-yellow">
+                            <h3>Left half</h3>
+                        </div>
+                        <div className="wd-grid-col-half-page wd-bg-color-blue wd-fg-color-white">
+                            <h3>Right half</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,5 +41,6 @@ export default function GridLayout() {
                 </div>
             </div>
         </div>
+
     );
 }
