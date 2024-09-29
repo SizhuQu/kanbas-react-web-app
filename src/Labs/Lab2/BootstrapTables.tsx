@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export default function BootstrapTables() {
     return (
         <div>
@@ -20,7 +22,7 @@ export default function BootstrapTables() {
 
             <div id="wd-css-responsive-tables">
                 <h2>Responsive tables</h2>
-                <div className="table-responsive">
+                <div className="table-responsive" >
                     <table className="table">
                         <thead>
                             <tr><th>Very</th><th>long</th><th>set</th><th>of</th><th>columns</th>
