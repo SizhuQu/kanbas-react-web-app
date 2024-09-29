@@ -2,6 +2,11 @@ import "./index.css";
 import BackgroundColors from "./BackgroundColors";
 import Borders from "./Borders";
 import ForegroundColors from "./ForegroundColors";
+import Padding from "./Padding";
+import Margins from "./Margins";
+import Corners from "./Corners";
+import Dimensions from "./Dimensions";
+import Positions from "./Positions";
 
 export default function Lab2() {
   return (
@@ -21,7 +26,7 @@ export default function Lab2() {
       <div id="wd-css-id-selectors">
         <h3>ID selectors</h3>
         <p id="wd-id-selector-1">
-          Instead of changing the look and feel of all the elements of the same name, 
+          Instead of changing the look and feel of all the elements of the same name,
           e.g., P, we can refer to a specific element by its ID
         </p>
         <p id="wd-id-selector-2">
@@ -53,8 +58,8 @@ export default function Lab2() {
               <span className="wd-selector-4">
                 Whereas this span is a direct child of its parent
               </span><br />
-                You can combine these relationships to create specific 
-                styles depending on the document structure
+              You can combine these relationships to create specific
+              styles depending on the document structure
             </p>
           </div>
         </div>
@@ -63,8 +68,12 @@ export default function Lab2() {
       <BackgroundColors />
       <ForegroundColors />
       <Borders />
+      <Padding />
+      <Margins />
+      <Corners />
+      <Dimensions />
+      <Positions />
     </div>
   );
 }
 
-  
