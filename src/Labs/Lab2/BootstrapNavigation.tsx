@@ -7,7 +7,7 @@ export default function BootstrapNavigation() {
                 <h2>Tabs</h2>
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <a className="nav-link active" href="#">Active</a>
+                        <a className="nav-link active" href="#">Active</a >
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">Link</a>
@@ -26,7 +26,7 @@ export default function BootstrapNavigation() {
                 </h2>
                 <div className="card"
                     style={{ width: "18rem" }}>
-                    <img src="images/stacked.jpg"
+                    <img src="images/stacked.jpg" alt=""
                         className="card-img-top" />
                     <div className="card-body">
                         <h5 className="card-title">
