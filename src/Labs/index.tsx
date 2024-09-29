@@ -1,9 +1,19 @@
 import Lab1 from "./Lab1";
+import React from "react";
+import App from "../App";
 import { Route, Routes } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TOC from "./TOC";
 import Lab2 from "./Lab2";
 import Lab3 from "./Lab3";
+import ReactDOM from "react-dom/client";
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
 export default function Labs() {
   return (
     <div>
