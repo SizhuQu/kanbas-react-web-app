@@ -12,12 +12,12 @@ import Float from "./Float";
 import GridLayout from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIcons";
+import BootstrapGrids from "./BootstrapGrids";
 
 export default function Lab2() {
   return (
-    <div id="wd-lab2">
+    <div className="container">
       <h2>Lab 2 - Cascading Style Sheets</h2>
-
       <h3>Styling with the STYLE attribute</h3>
       <p  /* style={{ backgroundColor: "blue", 
       color: "white" }} */
@@ -83,6 +83,7 @@ export default function Lab2() {
       <GridLayout />
       <Flex />
       <ReactIconsSampler />
+      <BootstrapGrids />
 
     </div>
   );
