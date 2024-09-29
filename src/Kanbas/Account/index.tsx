@@ -1,12 +1,12 @@
 import { Routes, Route, Navigate } from "react-router";
-import KanbasNavigation from "./Navigation";
+import AccountNavigation from "./Navigation";
 import Dashboard from "../Dashboard";
 import Courses from "../Courses";
 export default function Account() {
   return (
     <div id="wd-kanbas">
       <div>
-        <KanbasNavigation />
+        <AccountNavigation />
         <Routes>
           <Route path="/" element={<Navigate to="Account" />} />
           <Route path="/Account/*" element={<Account />} />
