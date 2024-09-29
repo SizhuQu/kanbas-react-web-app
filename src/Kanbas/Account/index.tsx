@@ -1,26 +1,19 @@
 import { Routes, Route, Navigate } from "react-router";
-import AccountNavigation from "./Navigation";
-import Profile from "./Profile";
-import Signin from "./Signin";
-import Signup from "./Signup";
+import KanbasNavigation from "./Navigation";
+import Dashboard from "../Dashboard";
+import Courses from "../Courses";
 export default function Account() {
   return (
-    <div id="wd-account-screen">
-      <table>
-        <tr>
-          <td valign="top">
-            <AccountNavigation />
-          </td>
-          <td valign="top">
-            <Routes>
-              <Route path="/"
-                     element={<Navigate to="/Kanbas/Account/Signin" />} />
-              <Route path="/Signin" element={<Signin />} />
-              <Route path="/Profile" element={<Profile />} />
-              <Route path="/Signup" element={<Signup />} />
-            </Routes>
-          </td>
-        </tr>
-      </table>
+    <div id="wd-kanbas">
+      <div>
+        <KanbasNavigation />
+        <Routes>
+          <Route path="/" element={<Navigate to="Account" />} />
+          <Route path="/Account/*" element={<Account />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Courses/:cid/*" element={<Courses />} />
+        </Routes>
+      </div>
     </div>
-);}
+  );
+}

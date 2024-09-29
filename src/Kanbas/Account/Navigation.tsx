@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-export default function AccountNavigation() {
+export default function KanbasNavigation() {
   return (
     <div id="wd-account-navigation">
       <Link to={`/Kanbas/Account/Signin`}  > Signin  </Link> <br/>
