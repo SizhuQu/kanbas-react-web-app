@@ -5,7 +5,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import { FaAlignJustify } from "react-icons/fa";
 
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 export default function Courses() {
   return (
     <div id="wd-courses">
