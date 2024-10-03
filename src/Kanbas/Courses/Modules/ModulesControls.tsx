@@ -1,9 +1,11 @@
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaBan } from "react-icons/fa";
 import GreenCheckmark from "./GreenCheckmark";
 
-export default function ModulesControls() {
+export default function ModulesControls(props: { collapseAll: () => void; viewProgress: () => void }) {
+    const { collapseAll, viewProgress } = props;
     return (
         <div id="wd-modules-controls" className="text-nowrap">
+
             <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Module
@@ -33,11 +35,13 @@ export default function ModulesControls() {
 
                     <li>
                         <a id="wd-unpublish-all-modules-and-items-btn" className="dropdown-item" href="#">
+                            <FaBan className="me-2 text-secondary" />
                             Unpublish all modules and items
                         </a>
                     </li>
                     <li>
                         <a id="wd-unpublish-modules-only-button" className="dropdown-item" href="#">
+                            <FaBan className="me-2 text-secondary" />
                             Unpublish modules only
                         </a>
                     </li>

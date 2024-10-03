@@ -8,11 +8,15 @@ export default function Modules() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const collapseAll = () => setIsCollapsed(!isCollapsed);
   const viewProgress = () => console.log("View Progress");
-  
+
   return (
 
-    <div>
-      <ModulesControls collapseAll={collapseAll} viewProgress={viewProgress} />
+    <div className="container">
+      <div className="row mb-3">
+        <div className="col-12 d-flex justify-content-end align-items-center">
+          <ModulesControls collapseAll={collapseAll} viewProgress={viewProgress} />
+        </div>
+      </div>
 
       <ul id="wd-modules" className="list-group rounded-0">
         <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
