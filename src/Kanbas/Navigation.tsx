@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import React from 'react';
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
@@ -51,15 +50,6 @@ export default function KanbasNavigation() {
                    bg-black text-center border-0">
         <LiaCogSolid className="fs-1 text-danger" /><br />
         Labs </Link>
-
-
-      <p><strong>Name: Sizhu Qu</strong></p>
-      <p><strong>Section: 02 </strong>Web Development - Fall 2024 </p>
-
-      <h3><strong>GitHub Repository:</strong></h3>
-      <ul>
-        <li><a href="https://github.com/SizhuQu/kanbas-react-web-app.git" target="_blank" rel="noopener noreferrer">kanbas-react-web-app</a></li>
-      </ul>
     </div>
 
   );

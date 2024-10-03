@@ -19,12 +19,21 @@ body * {
   border-left: 3px solid black !important;
 }
 
-#wd-kanbas-navigation .list-group-item:hover {
-  background-color: #333333;
-  color: gray;
-  border-left: 3px solid gray;
+.btn-secondary {
+  --bs-btn-color: #000 !important;
+  --bs-btn-bg: #c7cdd1 !important;
+  --bs-btn-border-color: #c7cdd1 !important;
+  --bs-btn-hover-color: #fff !important;
 }
 
-#wd-kanbas-navigation .list-group-item:hover .fs-1 {
-  color: red;
+.bg-secondary {
+  --bs-secondary-rgb: 199, 205, 209;
+}
+
+.list-group-item {
+  --bs-list-group-border-color: gray;
+}
+
+.wd-lesson {
+  border-left: 3px solid green !important;
 }

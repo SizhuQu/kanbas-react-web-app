@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from "react-router";
-import "./styles.css";
-
 import Account from "./Account";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ReactDOM from "react-dom/client";
+import "./styles.css";
 
 export default function Kanbas() {
   return (
