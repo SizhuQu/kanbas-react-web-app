@@ -5,7 +5,6 @@ import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactDOM from "react-dom/client";
 import "./styles.css";
 
 export default function Kanbas() {
