@@ -2,7 +2,8 @@ import { MdDoNotDisturbAlt } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
 import { BiImport } from "react-icons/bi";
 import { LiaFileImportSolid } from "react-icons/lia";
-{/* Find more icons */}
+import { BsHouseDoor, BsGraphUp, BsMegaphone, BsBell } from "react-icons/bs";
+
 export default function CourseStatus() {
   return (
     <div id="wd-course-status" style={{ width: "300px" }}>
@@ -17,20 +18,42 @@ export default function CourseStatus() {
             <FaCheckCircle className="me-2 fs-5" /> Publish </button>
         </div>
       </div><br />
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <BiImport className="me-2 fs-5" /> Import Existing Content </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <LiaFileImportSolid className="me-2 fs-5" /> Import from Commons </button>
-      {/* Complete the rest of the buttons */}
-    </div>
-);}
 
-    //   <div><button>Import Existing Content</button></div>
-    //   <div><button>Import from Commons</button></div>
-    //   <div><button>Choose Home Page</button></div>
-    //   <div><button>View Course Stream</button></div>
-    //   <div><button>New Announcement</button></div>
-    //   <div><button>New Analytics</button></div>
-    //   <div><button>View Course Notifications</button></div>
-    // </div>
-  
+      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+        <BiImport className="me-2 fs-5" />
+        Import Existing Content
+      </button>
+
+      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+        <LiaFileImportSolid className="me-2 fs-5" />
+        Import from Commons
+      </button>
+
+      <button className="btn btn-lg btn-secondary w-100 mt-2 text-start">
+        <BsHouseDoor className="me-2 fs-5" />
+        Choose Home Page
+      </button>
+
+      <button className="btn btn-lg btn-secondary w-100 mt-2 text-start">
+        <BsGraphUp className="me-2 fs-5" />
+        View Course Screen
+      </button>
+
+      <button className="btn btn-lg btn-secondary w-100 mt-2 text-start">
+        <BsMegaphone className="me-2 fs-5" />
+        New Announcement
+      </button>
+
+      <button className="btn btn-lg btn-secondary w-100 mt-2 text-start">
+        <BsGraphUp className="me-2 fs-5" />
+        New Analytics
+      </button>
+
+      <button className="btn btn-lg btn-secondary w-100 mt-2 text-start">
+        <BsBell className="me-2 fs-5" />
+        View Course Notifications
+      </button>
+    </div>
+
+  );
+}
