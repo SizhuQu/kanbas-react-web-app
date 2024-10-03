@@ -18,3 +18,13 @@ body * {
   background-color: white;
   border-left: 3px solid black !important;
 }
+
+#wd-kanbas-navigation .list-group-item:hover {
+  background-color: #333333;
+  color: gray;
+  border-left: 3px solid gray;
+}
+
+#wd-kanbas-navigation .list-group-item:hover .fs-1 {
+  color: red;
+}
