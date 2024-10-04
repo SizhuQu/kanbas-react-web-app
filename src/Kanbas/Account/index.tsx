@@ -9,8 +9,7 @@ export default function Account() {
     <div className="container-fluid">
       <div className="row">
         <AccountNavigation />
-
-        <div className="col-md-10 p-4">
+        <div className="col-md-10 p-3">
           <Routes>
             <Route path="/" element={<Navigate to="Signin" />} />
             <Route path="Signin" element={<Signin />} />

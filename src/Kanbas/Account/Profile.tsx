@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 export default function Profile() {
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-4">
+    <div id="wd-signin-screen" className="container mt-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
           <h3 className="text-center">Profile</h3>
           <input
             id="wd-username"

@@ -1,5 +1,6 @@
 import Labs from "./Labs";
 import Kanbas from "./Kanbas";
+import Account from "./Kanbas/Account";
 import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
           <Route path="/" element={<Navigate to="Kanbas" />} />
           <Route path="/Labs/*" element={<Labs />} />
           <Route path="/Kanbas/*" element={<Kanbas />} />
+        <Route path="/Account/*" element={<Account />} />
         </Routes>
       </div>
     </HashRouter>

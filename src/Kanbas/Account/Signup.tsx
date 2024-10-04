@@ -19,13 +19,13 @@ export default function Signup() {
           />
           <Link
             id="signup-btn"
-            to="/Kanbas/Account/Profile"
+            to="/Account/Profile" 
             className="btn btn-primary w-100 mb-3"
           >
             Signup
           </Link>
           <div className="text-center">
-            <Link id="signin-link" to="/Kanbas/Account/Signin">
+            <Link id="signin-link" to="/Account/Signin">
               Signin
             </Link>
           </div>
