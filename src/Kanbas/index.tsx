@@ -6,6 +6,7 @@ import Courses from "./Courses";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
+import Labs from "../Labs";
 
 export default function Kanbas() {
   return (
@@ -19,6 +20,7 @@ export default function Kanbas() {
           <Route path="/Courses/:cid/*" element={<Courses />} />
           <Route path="/Calendar" element={<h1>Calendar</h1>} />
           <Route path="/Inbox" element={<h1>Inbox</h1>} />
+          <Route path="/Labs" element={<Labs/>} />
         </Routes>
       </div>
     </div>
