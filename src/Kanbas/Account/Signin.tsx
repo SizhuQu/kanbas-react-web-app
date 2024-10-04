@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function Signin() {
-  console.log("Signin component rendered");
   return (
     <div id="wd-signin-screen" className="container mt-5">
       <div className="row">
@@ -20,13 +19,13 @@ export default function Signin() {
           />
           <Link
             id="signin-btn"
-            to="Profile" 
+            to="/Account/Profile" 
             className="btn btn-primary w-100 mb-3"
           >
             Sign in
           </Link>
           <div className="text-center">
-            <Link id="signup-link" to="Signup">
+            <Link id="signup-link" to="/Account/Signup">
               Sign up
             </Link>
           </div>

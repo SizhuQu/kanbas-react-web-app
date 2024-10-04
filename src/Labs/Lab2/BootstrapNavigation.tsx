@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 export default function BootstrapNavigation() {
     return (
@@ -7,16 +8,16 @@ export default function BootstrapNavigation() {
                 <h2>Tabs</h2>
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <a className="nav-link active" href="#">Active</a >
+                        <Link className="nav-link active" to="/active">Active</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Link</a>
+                        <Link className="nav-link" to="/link1">Link 1</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Link</a>
+                        <Link className="nav-link" to="/link2">Link 2</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link disabled" href="#">Disabled</a>
+                        <span className="nav-link disabled">Disabled</span>
                     </li>
                 </ul>
             </div>
@@ -35,9 +36,9 @@ export default function BootstrapNavigation() {
                         <p className="card-text">
                             Stacking the most powerful rocket in history. Mars or bust!
                         </p>
-                        <a href="#" className="btn btn-primary">
+                        <Link to="/boldly-go" className="btn btn-primary">
                             Boldly Go
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
