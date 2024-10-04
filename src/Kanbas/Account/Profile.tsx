@@ -4,8 +4,8 @@ export default function Profile() {
   return (
     <div id="wd-signin-screen" className="container mt-5">
       <div className="row">
-        <div className="col-md-6 offset-md-3">
-          <h3 className="text-center">Profile</h3>
+        <div className="col-md-4 offset-md-3">
+          <h1 className="text-center">Profile</h1>
           <input
             id="wd-username"
             value="alice"

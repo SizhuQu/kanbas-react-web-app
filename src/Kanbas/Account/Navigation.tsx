@@ -19,6 +19,13 @@ export default function AccountNavigation() {
             Profile
           </Link>
         </li>
+
+        <li className="nav-item">
+          <Link to="/Kanbas" className="nav-link fs-5 text-danger">
+            Kanbas
+          </Link>
+
+        </li>
       </ul>
     </div>
   );

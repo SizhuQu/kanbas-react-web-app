@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export default function Signup() {
   return (
     <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-4">
-          <h3 className="text-center">Signup</h3>
+      <div className="row">
+        <div className="col-md-4 offset-md-3">
+          <h1 className="text-center">Sign up</h1>
           <input
             id="signup-username"
             placeholder="username"

@@ -4,7 +4,7 @@ export default function Signin() {
   return (
     <div id="wd-signin-screen" className="container mt-5">
       <div className="row">
-        <div className="col-md-6 offset-md-3">
+        <div className="col-md-4 offset-md-3">
           <h1 className="text-center">Sign in</h1>
           <input
             id="signin-username"
@@ -19,13 +19,13 @@ export default function Signin() {
           />
           <Link
             id="signin-btn"
-            to="Profile" 
+            to="/Account/Profile" 
             className="btn btn-primary w-100 mb-3"
           >
             Sign in
           </Link>
           <div className="text-center">
-            <Link id="signup-link" to="Signup">
+            <Link id="signup-link" to="/Account/Signup">
               Sign up
             </Link>
           </div>
