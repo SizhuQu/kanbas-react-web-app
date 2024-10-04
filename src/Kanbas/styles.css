@@ -39,3 +39,20 @@ body * {
 }
 
 
+#wd-account-navigation .nav-link {
+  padding: 10px 0;
+  font-size: 1.2rem;
+}
+
+#wd-account-navigation .nav-link.active {
+  font-weight: bold;
+  color: #000;
+}
+
+#wd-account-navigation .nav-link.text-danger {
+  color: #d9534f;
+}
+
+#wd-account-navigation .nav-link:hover {
+  text-decoration: underline;
+}

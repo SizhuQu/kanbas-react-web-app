@@ -2,21 +2,64 @@ import { Link } from "react-router-dom";
 
 export default function Profile() {
   return (
-    <div id="wd-profile-screen">
-      <h3>Profile</h3>
-      <input id="wd-username" value="alice" placeholder="username" readOnly /><br/>
-      <input id="wd-password" value="123" placeholder="password" type="password" readOnly /><br/>
-      <input id="wd-firstname" value="Alice" placeholder="First Name" readOnly /><br/>
-      <input id="wd-lastname" value="Wonderland" placeholder="Last Name" readOnly /><br/>
-      <input id="wd-dob" value="2000-01-01" type="date" readOnly /><br/>
-      <input id="wd-email" value="alice@wonderland" type="email" readOnly /><br/>
-      <select id="wd-role" value="USER" disabled>
-        <option value="USER">User</option>
-        <option value="ADMIN">Admin</option>
-        <option value="FACULTY">Faculty</option>
-        <option value="STUDENT">Student</option>
-      </select><br/>
-      <Link to="/Account/Signin">Sign out</Link>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-4">
+          <h3 className="text-center">Profile</h3>
+          <input
+            id="wd-username"
+            value="alice"
+            placeholder="Username"
+            readOnly
+            className="form-control mb-3"
+          />
+          <input
+            id="wd-password"
+            value="123"
+            placeholder="Password"
+            type="password"
+            readOnly
+            className="form-control mb-3"
+          />
+          <input
+            id="wd-firstname"
+            value="Alice"
+            placeholder="First Name"
+            readOnly
+            className="form-control mb-3"
+          />
+          <input
+            id="wd-lastname"
+            value="Wonderland"
+            placeholder="Last Name"
+            readOnly
+            className="form-control mb-3"
+          />
+          <input
+            id="wd-dob"
+            value="mm/dd/yyyy"
+            type="date"
+            readOnly
+            className="form-control mb-3"
+          />
+          <input
+            id="wd-email"
+            value="alice@wonderland.com"
+            type="email"
+            readOnly
+            className="form-control mb-3"
+          />
+          <select id="wd-role" value="USER" disabled className="form-control mb-4">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+            <option value="FACULTY">Faculty</option>
+            <option value="STUDENT">Student</option>
+          </select>
+          <Link to="/Account/Signin" className="btn btn-danger w-100">
+            Signout
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
