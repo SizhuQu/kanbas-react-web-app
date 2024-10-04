@@ -1,4 +1,4 @@
-import { FaPlus, FaGripLines, FaCheckCircle, FaEllipsisV, FaBook, FaSearch } from "react-icons/fa";
+import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch } from "react-icons/fa";
 import { FaGripVertical } from "react-icons/fa";
 
 
