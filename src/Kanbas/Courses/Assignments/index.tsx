@@ -1,8 +1,12 @@
+import { useParams, Link } from "react-router-dom";
 import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch } from "react-icons/fa";
-import { FaGripVertical } from "react-icons/fa";
+import { assignments } from "";
 
 
 export default function Assignments() {
+  const { cid } = useParams();
+  const filteredAssignments = assignments.filter((assignment) => assignment.course === cid);
+
   return (
     <div id="wd-assignments" className="container">
       <div className="row mb-3">
