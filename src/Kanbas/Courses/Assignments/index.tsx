@@ -1,10 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch } from "react-icons/fa";
-import { assignments } from "";
-
+import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch, FaGripVertical } from "react-icons/fa";
+import { assignments } from "../../Database";
 
 export default function Assignments() {
-  const { cid } = useParams();
+  const { cid } = useParams(); 
   const filteredAssignments = assignments.filter((assignment) => assignment.course === cid);
 
   return (
@@ -34,7 +33,6 @@ export default function Assignments() {
         <div className="list-group border rounded-0">
           <div className="d-flex justify-content-between align-items-center list-group-item bg-light">
             <div className="d-flex align-items-center">
-
               <FaGripVertical className="me-2 text-secondary fs-4" />
               <h5 className="mb-0 ms-2 fw-bold">ASSIGNMENTS</h5>
             </div>
@@ -61,90 +59,36 @@ export default function Assignments() {
         </div>
 
         <ul className="list-group list-group-flush">
-
-          <li
-            className="list-group-item d-flex align-items-center justify-content-between"
-            style={{
-              border: '1px solid #000',
-              borderLeft: '5px solid #006400',
-              borderRadius: '0',
-            }}
-          >
-            <div className="d-flex align-items-center">
-              <FaGripVertical className="me-2 text-secondary fs-4" />
-              <FaBook className="me-2 text-success fs-4" />
-              <div>
-                <a href="#/Kanbas/Courses/1234/Assignments/123" className="fw-bold text-dark text-decoration-none">
-                  A1
-                </a>
-                <p className="text-muted mb-0">
-                  Multiple Modules | <strong>Not available until</strong> May 6 at 12:00am |
-                  <strong>Due</strong> May 13 at 11:59pm | 100 pts
-                </p>
+          {filteredAssignments.map((assignment) => (
+            <li
+              key={assignment._id}
+              className="list-group-item d-flex align-items-center justify-content-between"
+              style={{
+                border: '1px solid #000',
+                borderLeft: '5px solid #006400',
+                borderRadius: '0',
+              }}
+            >
+              <div className="d-flex align-items-center">
+                <FaGripVertical className="me-2 text-secondary fs-4" />
+                <FaBook className="me-2 text-success fs-4" />
+                <div>
+                  <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} className="fw-bold text-dark text-decoration-none">
+                    {assignment.title}
+                  </Link>
+                  <p className="text-muted mb-0">
+                    {assignment.course} | <strong>Not available until</strong> May 6 at 12:00am | <strong>Due</strong> May 13 at 11:59pm | 100 pts
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="d-flex align-items-center">
-              <FaCheckCircle className="text-success fs-5 me-2" />
-              <FaEllipsisV className="text-secondary fs-5" />
-            </div>
-          </li>
-
-
-          <li
-            className="list-group-item d-flex align-items-center justify-content-between"
-            style={{
-              border: '1px solid #000',
-              borderLeft: '5px solid #006400',
-              borderRadius: '0',
-            }}
-          >
-            <div className="d-flex align-items-center">
-              <FaGripVertical className="me-2 text-secondary fs-4" />
-              <FaBook className="me-2 text-success fs-4" />
-              <div>
-                <a href="#/Kanbas/Courses/1234/Assignments/124" className="fw-bold text-dark text-decoration-none">
-                  A2
-                </a>
-                <p className="text-muted mb-0">
-                  Multiple Modules | <strong>Not available until</strong> May 13 at 12:00am |
-                  <strong>Due</strong> May 20 at 11:59pm | 100 pts
-                </p>
+              <div className="d-flex align-items-center">
+                <FaCheckCircle className="text-success fs-5 me-2" />
+                <FaEllipsisV className="text-secondary fs-5" />
               </div>
-            </div>
-            <div className="d-flex align-items-center">
-              <FaCheckCircle className="text-success fs-5 me-2" />
-              <FaEllipsisV className="text-secondary fs-5" />
-            </div>
-          </li>
-
-          <li
-            className="list-group-item d-flex align-items-center justify-content-between"
-            style={{
-              border: '1px solid #000',
-              borderLeft: '5px solid #006400',
-              borderRadius: '0',
-            }}
-          >
-            <div className="d-flex align-items-center">
-              <FaGripVertical className="me-2 text-secondary fs-4" />
-              <FaBook className="me-2 text-success fs-4" />
-              <div>
-                <a href="#/Kanbas/Courses/1234/Assignments/125" className="fw-bold text-dark text-decoration-none">
-                  A3
-                </a>
-                <p className="text-muted mb-0">
-                  Multiple Modules | <strong>Not available until</strong> May 20 at 12:00am |
-                  <strong>Due</strong> May 27 at 11:59pm | 100 pts
-                </p>
-              </div>
-            </div>
-            <div className="d-flex align-items-center">
-              <FaCheckCircle className="text-success fs-5 me-2" />
-              <FaEllipsisV className="text-secondary fs-5" />
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
       </div>
-    </div >
+    </div>
   );
 }

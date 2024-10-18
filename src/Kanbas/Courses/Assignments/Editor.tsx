@@ -1,5 +1,12 @@
+import { useParams, Link } from "react-router-dom";
+import { assignments } from "../../Database";
+
 export default function AssignmentEditor() {
+  const { aid } = useParams();
+  const assignment = assignments.find((assignment) => assignment._id === aid);
+
   return (
+
     <div id="wd-assignments-editor" className="container mt-4">
       <div className="row mb-1">
         <div className="col-md-10">
@@ -7,27 +14,20 @@ export default function AssignmentEditor() {
           <input
             id="wd-name"
             className="form-control"
-            value="A1"
+            value={assignment?.title || ''}
           />
         </div>
       </div>
 
       <div className="row mb-3">
         <div className="col-md-10">
-          <label htmlFor="wd-description" className="form-label fw-bold"></label>
+          <label htmlFor="wd-description" className="form-label fw-bold">Description</label>
           <textarea
             id="wd-description"
             className="form-control"
             rows={5}
-          >
-            The assignment is available online. Submit a link to the landing page of your Web
-            application running on Netlify. The landing page should include the following:
-            - Your full name and section
-            - Links to each of the lab assignments
-            - Link to the Kanbas application
-            - Links to all relevant source code repositories
-            The Kanbas application should include a link to navigate back to the landing page.
-          </textarea>
+            value="The assignment is available online. "
+          />
         </div>
       </div>
 
@@ -136,11 +136,19 @@ export default function AssignmentEditor() {
       </div>
 
       <div className="d-flex justify-content-end mt-4">
-        <button id="wd-cancel" className="btn btn-light me-2">Cancel</button>
-        <button id="wd-save" className="btn btn-danger">Save</button>
+        <Link
+          to={`/Kanbas/Courses/${assignment?.course || ''}/Assignments`}
+          id="wd-cancel"
+          className="btn btn-light me-2"
+        >
+          Cancel
+        </Link>
+        <button
+
+          id="wd-save"
+          className="btn btn-danger">Save</button>
       </div>
     </div>
 
   );
-
 }

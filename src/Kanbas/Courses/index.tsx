@@ -6,7 +6,7 @@ import AssignmentEditor from "./Assignments/Editor";
 import { FaAlignJustify } from "react-icons/fa";
 import PeopleTable from "./People/Table";
 import { courses } from "../Database";
-import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
+import { Route, Routes, useParams, useLocation } from "react-router";
 
 export default function Courses() {
   const { cid } = useParams();
@@ -26,7 +26,6 @@ export default function Courses() {
         </div>
         <div className="flex-fill">
           <Routes>
-            <Route path="*" element={<Navigate to="Home" />} />
             <Route path="Home" element={<Home />} />
             <Route path="Modules" element={<Modules />} />
             <Route path="Assignments" element={<Assignments />} />
