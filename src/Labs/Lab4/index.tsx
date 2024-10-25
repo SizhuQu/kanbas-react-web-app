@@ -10,6 +10,7 @@ import ObjectStateVariable from './ObjectStateVariable';
 import ArrayStateVariable from './ArrayStateVariable';
 import ParentStateComponent from './ParentStateComponent';
 import ReduxExamples from "./ReduxExamples";
+import TodoList from './ReduxExamples/todos/TodoList';
 
 export default function Lab4() {
     function sayHello() {
@@ -31,6 +32,7 @@ export default function Lab4() {
             <ArrayStateVariable />
             <ParentStateComponent />
             <ReduxExamples />
+            <TodoList />
 
         </div>
     );
