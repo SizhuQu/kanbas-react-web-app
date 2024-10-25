@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 export default function Labs() {
   return (
     <Provider store={store}>
-      <div>
+      <div className="container-fluid">
         <h1>Sizhu Qu</h1>
         <h1>Labs</h1>
         <TOC />
