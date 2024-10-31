@@ -7,7 +7,9 @@ export default function TodoList() {
 
     return (
         <div>
-            <h2>Todo List</h2>
+            <h2>
+                Todo List
+            </h2>
             <ul className="list-group">
                 <TodoForm />
                 {todos.map((todo: any) => (
