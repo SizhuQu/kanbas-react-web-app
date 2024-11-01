@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import * as db from "./Database";
+import { enroll, unenroll } from "./Enrollment/reducer";
 
 export default function Dashboard({
   courses,
@@ -17,8 +19,29 @@ export default function Dashboard({
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
 }) {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const [showAllCourses, setShowAllCourses] = useState(false);
+
+  const toggleEnrollments = () => setShowAllCourses(!showAllCourses);
+
   const { enrollments } = db;
+  const filteredCourses = showAllCourses
+    ? courses
+    : courses.filter((course) =>
+      enrollments.some(
+        (enrollment) =>
+          enrollment.user === currentUser._id && enrollment.course === course._id
+      )
+    );
+
+  const handleEnroll = (courseId: string) => {
+    dispatch(enroll({ userId: currentUser._id, courseId }));
+  };
+
+  const handleUnenroll = (courseId: string) => {
+    dispatch(unenroll({ userId: currentUser._id, courseId }));
+  };
 
   return (
     <div id="wd-dashboard">
@@ -60,19 +83,26 @@ export default function Dashboard({
         </>
       )}
 
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
+      {currentUser?.role === "STUDENT" && (
+        <button
+          className="btn btn-primary float-end"
+          onClick={toggleEnrollments}
+        >
+          {showAllCourses ? "Show Enrolled Courses" : "Show All Courses"}
+        </button>
+      )}
+
+      <h2 id="wd-dashboard-published">Published Courses ({filteredCourses.length})</h2>
       <hr />
 
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-4 g-5">
-          {courses
-            .filter((course) =>
-              enrollments.some(
-                (enrollment) =>
-                  enrollment.user === currentUser._id && enrollment.course === course._id
-              )
-            )
-            .map((course) => (
+          {filteredCourses.map((course) => {
+            const isEnrolled = enrollments.some(
+              (enrollment) => enrollment.user === currentUser._id && enrollment.course === course._id
+            );
+
+            return (
               <div className="wd-dashboard-course col" style={{ width: "300px" }} key={course._id}>
                 <div className="card rounded-3 overflow-hidden">
                   <Link
@@ -116,11 +146,25 @@ export default function Dashboard({
                           </button>
                         </>
                       )}
+
+                      {currentUser?.role === "STUDENT" && (
+                        <button
+                          onClick={(event) => {
+                            event.preventDefault();
+                            isEnrolled ? handleUnenroll(course._id) : handleEnroll(course._id);
+                          }}
+                          className={`btn float-end ${isEnrolled ? "btn-danger" : "btn-success"
+                            }`}
+                        >
+                          {isEnrolled ? "Unenroll" : "Enroll"}
+                        </button>
+                      )}
                     </div>
                   </Link>
                 </div>
               </div>
-            ))}
+            );
+          })}
         </div>
       </div>
     </div>
