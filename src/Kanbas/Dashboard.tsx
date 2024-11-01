@@ -25,22 +25,24 @@ export default function Dashboard({
 
   const toggleEnrollments = () => setShowAllCourses(!showAllCourses);
 
-  const { enrollments } = db;
+  const [enrolledCourses, setEnrolledCourses] = useState(
+    db.enrollments
+      .filter((enrollment) => enrollment.user === currentUser._id)
+      .map((enrollment) => enrollment.course)
+  );
+
   const filteredCourses = showAllCourses
     ? courses
-    : courses.filter((course) =>
-      enrollments.some(
-        (enrollment) =>
-          enrollment.user === currentUser._id && enrollment.course === course._id
-      )
-    );
+    : courses.filter((course) => enrolledCourses.includes(course._id));
 
   const handleEnroll = (courseId: string) => {
     dispatch(enroll({ userId: currentUser._id, courseId }));
+    setEnrolledCourses((prev) => [...prev, courseId]);
   };
 
   const handleUnenroll = (courseId: string) => {
     dispatch(unenroll({ userId: currentUser._id, courseId }));
+    setEnrolledCourses((prev) => prev.filter((id) => id !== courseId));
   };
 
   return (
@@ -98,9 +100,7 @@ export default function Dashboard({
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-4 g-5">
           {filteredCourses.map((course) => {
-            const isEnrolled = enrollments.some(
-              (enrollment) => enrollment.user === currentUser._id && enrollment.course === course._id
-            );
+            const isEnrolled = enrolledCourses.includes(course._id);
 
             return (
               <div className="wd-dashboard-course col" style={{ width: "300px" }} key={course._id}>
@@ -153,8 +153,7 @@ export default function Dashboard({
                             event.preventDefault();
                             isEnrolled ? handleUnenroll(course._id) : handleEnroll(course._id);
                           }}
-                          className={`btn float-end ${isEnrolled ? "btn-danger" : "btn-success"
-                            }`}
+                          className={`btn float-end ${isEnrolled ? "btn-danger" : "btn-success"}`}
                         >
                           {isEnrolled ? "Unenroll" : "Enroll"}
                         </button>
