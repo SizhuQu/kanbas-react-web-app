@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 
 export default function AccountNavigation() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  // eslint-disable-next-line
   const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
+  // eslint-disable-next-line
   const { pathname } = useLocation();
 
   return (

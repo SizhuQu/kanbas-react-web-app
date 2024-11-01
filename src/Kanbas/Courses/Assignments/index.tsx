@@ -2,7 +2,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch, FaGripVertical } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAssignment } from "./reducer";
-import { useState } from "react";
 
 type AssignmentsProps = {
   isFaculty: boolean;

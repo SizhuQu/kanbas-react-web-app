@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { addAssignment, updateAssignment } from "./reducer";
 
 type AssignmentEditorProps = {
@@ -41,7 +41,7 @@ export default function AssignmentEditor({ isFaculty }: AssignmentEditorProps) {
     }
     navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
-
+  // eslint-disable-next-line
   const handleCancel = () => navigate(`/Kanbas/Courses/${cid}/Assignments`);
 
   return (
