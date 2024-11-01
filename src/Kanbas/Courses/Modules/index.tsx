@@ -24,16 +24,18 @@ export default function Modules({ isFaculty }: ModulesProps) {
     <div className="container">
       <div className="row mb-3">
         <div className="col-12 d-flex justify-content-end align-items-center">
-          <ModulesControls
-            collapseAll={collapseAll}
-            viewProgress={viewProgress}
-            setModuleName={setModuleName}
-            moduleName={moduleName}
-            addModule={() => {
-              dispatch(addModule({ name: moduleName, course: cid }));
-              setModuleName("");
-            }}
-          />
+          {isFaculty && (
+            <ModulesControls
+              collapseAll={collapseAll}
+              viewProgress={viewProgress}
+              setModuleName={setModuleName}
+              moduleName={moduleName}
+              addModule={() => {
+                dispatch(addModule({ name: moduleName, course: cid }));
+                setModuleName("");
+              }}
+            />
+          )}
         </div>
       </div>
 
@@ -58,20 +60,14 @@ export default function Modules({ isFaculty }: ModulesProps) {
                   />
                 )}
 
-                <ModuleControlButtons
-                  moduleId={module._id}
-                  deleteModule={(moduleId) => {
-                    if (isFaculty) {
-                      dispatch(deleteModule(moduleId));
-                    }
-                  }}
-                  editModule={(moduleId) => {
-                    if (isFaculty) {
-                      dispatch(editModule(moduleId));
-                    }
-                  }}
-                  isFaculty={isFaculty} // 传递 isFaculty 到 ModuleControlButtons
-                />
+                {isFaculty && (
+                  <ModuleControlButtons
+                    moduleId={module._id}
+                    deleteModule={(moduleId) => dispatch(deleteModule(moduleId))}
+                    editModule={(moduleId) => dispatch(editModule(moduleId))}
+                    isFaculty={isFaculty}
+                  />
+                )}
               </div>
 
               {module.lessons && (
@@ -80,7 +76,7 @@ export default function Modules({ isFaculty }: ModulesProps) {
                     <li key={lesson._id} className="wd-lesson list-group-item p-3 ps-1">
                       <BsGripVertical className="me-2 fs-3" /> {lesson.name}
 
-                      <LessonControlButtons isFaculty={isFaculty} />
+                      <LessonControlButtons />
                     </li>
                   ))}
                 </ul>

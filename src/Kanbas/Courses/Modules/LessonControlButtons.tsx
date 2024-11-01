@@ -1,9 +1,7 @@
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
-type LessonControlButtonsProps = {
-  isFaculty: boolean;
-};
-export default function LessonControlButtons({ isFaculty }: LessonControlButtonsProps) {
+
+export default function LessonControlButtons() {
   return (
     <div className="float-end">
       <GreenCheckmark />

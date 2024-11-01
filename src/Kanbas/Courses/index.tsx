@@ -12,13 +12,13 @@ export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
-  const { currentUser } = useSelector((state: any) => state.account);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser?.role === "FACULTY";
 
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
-
+        
         <FaAlignJustify className="me-4 fs-4 mb-1" />
         {course && course.name} &gt; {pathname.split("/")[4]}
       </h2>
@@ -27,7 +27,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
           <CoursesNavigation />
         </div>
         <div className="flex-fill">
-          <Routes>
+        <Routes>
             <Route path="Home" element={<Home />} />
             <Route path="Modules" element={<Modules isFaculty={isFaculty} />} />
             <Route path="Assignments" element={<Assignments isFaculty={isFaculty} />} />

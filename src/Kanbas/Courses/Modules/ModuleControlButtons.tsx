@@ -17,14 +17,18 @@ export default function ModuleControlButtons({
 }) {
   return (
     <div className="float-end">
-      <FaPencil
-        onClick={() => isFaculty && editModule(moduleId)}
-        className="text-primary me-3"
-      />
-      <FaTrash
-        onClick={() => isFaculty && deleteModule(moduleId)}
-        className="text-danger me-2 mb-1"
-      />
+      {isFaculty && (
+        <>
+          <FaPencil
+            onClick={() => editModule(moduleId)}
+            className="text-primary me-3"
+          />
+          <FaTrash
+            onClick={() => deleteModule(moduleId)}
+            className="text-danger me-2 mb-1"
+          />
+        </>
+      )}
       <GreenCheckmark />
       <FaPlus className="fs-4 mx-2" />
       <IoEllipsisVertical className="fs-4" />

@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch, FaGripVertical } from "react-icons/fa";
 import { assignments } from "../../Database";
+
 type AssignmentsProps = {
   isFaculty: boolean;
 };
@@ -23,14 +24,17 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
               placeholder="Search for Assignments"
             />
           </div>
-          <div>
-            <button id="wd-add-assignment-group" className="btn btn-secondary me-2">
-              + Group
-            </button>
-            <button id="wd-add-assignment" className="btn btn-danger">
-              + Assignment
-            </button>
-          </div>
+
+          {isFaculty && (
+            <div>
+              <button id="wd-add-assignment-group" className="btn btn-secondary me-2">
+                + Group
+              </button>
+              <button id="wd-add-assignment" className="btn btn-danger">
+                + Assignment
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="list-group border rounded-0">
@@ -51,12 +55,16 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
               >
                 40% of Total
               </span>
-              <button className="btn p-0 me-3" style={{ border: "none", background: "none" }}>
-                <FaPlus className="text-secondary" />
-              </button>
-              <button className="btn p-0" style={{ border: "none", background: "none" }}>
-                <FaEllipsisV className="text-secondary" />
-              </button>
+              {isFaculty && (
+                <>
+                  <button className="btn p-0 me-3" style={{ border: "none", background: "none" }}>
+                    <FaPlus className="text-secondary" />
+                  </button>
+                  <button className="btn p-0" style={{ border: "none", background: "none" }}>
+                    <FaEllipsisV className="text-secondary" />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -76,7 +84,8 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
                 <FaGripVertical className="me-2 text-secondary fs-4" />
                 <FaBook className="me-2 text-success fs-4" />
                 <div>
-                  <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} className="fw-bold text-dark text-decoration-none">
+                  <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
+                    className="fw-bold text-dark text-decoration-none">
                     {assignment.title}
                   </Link>
                   <p className="text-muted mb-0">
