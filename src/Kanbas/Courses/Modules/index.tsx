@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ModulesControls from "./ModulesControls";
 import ModuleControlButtons from "./ModuleControlButtons";
 import LessonControlButtons from "./LessonControlButtons";
 import { BsGripVertical } from "react-icons/bs";
 import { useParams } from "react-router";
-import * as db from "../../Database";
-import { addModule, editModule, updateModule, deleteModule }
-  from "./reducer";
+import { addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 
+type ModulesProps = {
+  isFaculty: boolean;
+};
 
-export default function Modules() {
+export default function Modules({ isFaculty }: ModulesProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const collapseAll = () => setIsCollapsed(!isCollapsed);
   const viewProgress = () => console.log("View Progress");
@@ -19,14 +20,16 @@ export default function Modules() {
   const { modules } = useSelector((state: any) => state.modulesReducer);
   const dispatch = useDispatch();
 
-
   return (
-
     <div className="container">
       <div className="row mb-3">
         <div className="col-12 d-flex justify-content-end align-items-center">
-          <ModulesControls collapseAll={collapseAll} viewProgress={viewProgress}
-            setModuleName={setModuleName} moduleName={moduleName} addModule={() => {
+          <ModulesControls
+            collapseAll={collapseAll}
+            viewProgress={viewProgress}
+            setModuleName={setModuleName}
+            moduleName={moduleName}
+            addModule={() => {
               dispatch(addModule({ name: moduleName, course: cid }));
               setModuleName("");
             }}
@@ -43,34 +46,41 @@ export default function Modules() {
                 <BsGripVertical className="me-2 fs-3" />
                 {!module.editing && module.name}
                 {module.editing && (
-                  <input className="form-control w-50 d-inline-block"
-                    onChange={(e) =>
-                      dispatch(
-                        updateModule({ ...module, name: e.target.value })
-                      )
-                    }
-
+                  <input
+                    className="form-control w-50 d-inline-block"
+                    onChange={(e) => dispatch(updateModule({ ...module, name: e.target.value }))}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         dispatch(updateModule({ ...module, editing: false }));
                       }
                     }}
-
-                    defaultValue={module.name} />
+                    defaultValue={module.name}
+                  />
                 )}
+
                 <ModuleControlButtons
                   moduleId={module._id}
                   deleteModule={(moduleId) => {
-                    dispatch(deleteModule(moduleId));
+                    if (isFaculty) {
+                      dispatch(deleteModule(moduleId));
+                    }
                   }}
-                  editModule={(moduleId) => dispatch(editModule(moduleId))}
+                  editModule={(moduleId) => {
+                    if (isFaculty) {
+                      dispatch(editModule(moduleId));
+                    }
+                  }}
+                  isFaculty={isFaculty} // 传递 isFaculty 到 ModuleControlButtons
                 />
               </div>
+
               {module.lessons && (
                 <ul className="wd-lessons list-group rounded-0">
                   {module.lessons.map((lesson: any) => (
                     <li key={lesson._id} className="wd-lesson list-group-item p-3 ps-1">
-                      <BsGripVertical className="me-2 fs-3" /> {lesson.name} <LessonControlButtons />
+                      <BsGripVertical className="me-2 fs-3" /> {lesson.name}
+
+                      <LessonControlButtons isFaculty={isFaculty} />
                     </li>
                   ))}
                 </ul>
@@ -79,6 +89,5 @@ export default function Modules() {
           ))}
       </ul>
     </div>
-
   );
 }

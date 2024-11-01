@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {Provider} from 'react-redux';
+import store from './Kanbas/store';
 
 
 const container = document.getElementById('root') as HTMLElement;
@@ -12,7 +14,9 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
+    <Provider store={store}> 
     <App />
+    </Provider>
   </React.StrictMode>
 );
 

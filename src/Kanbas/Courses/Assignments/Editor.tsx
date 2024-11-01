@@ -1,7 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { assignments } from "../../Database";
+type AssignmentsProps = {
+  isFaculty: boolean;
+};
 
-export default function AssignmentEditor() {
+export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
   const { aid } = useParams();
   const assignment = assignments.find((assignment) => assignment._id === aid);
 

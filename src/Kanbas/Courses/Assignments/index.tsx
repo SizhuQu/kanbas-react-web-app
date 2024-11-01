@@ -1,9 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch, FaGripVertical } from "react-icons/fa";
 import { assignments } from "../../Database";
+type AssignmentsProps = {
+  isFaculty: boolean;
+};
 
-export default function Assignments() {
-  const { cid } = useParams(); 
+export default function Assignments({ isFaculty }: AssignmentsProps) {
+  const { cid } = useParams();
   const filteredAssignments = assignments.filter((assignment) => assignment.course === cid);
 
   return (
