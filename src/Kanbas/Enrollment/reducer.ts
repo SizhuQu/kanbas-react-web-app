@@ -1,33 +1,46 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type EnrollmentState = {
-    enrollments: { [userId: string]: string[] };
+    enrollments: { userId: string; courseId: string }[];
 };
 
 const initialState: EnrollmentState = {
-    enrollments: {},
+    enrollments: [],
 };
 
 const enrollmentsSlice = createSlice({
     name: "enrollments",
     initialState,
     reducers: {
-        enroll: (state, action: PayloadAction<{ userId: string; courseId: string }>) => {
+        enroll: (
+            state,
+            action: PayloadAction<{ userId: string; courseId: string }>
+        ) => {
             const { userId, courseId } = action.payload;
-            state.enrollments[userId] = state.enrollments[userId] || [];
-            if (!state.enrollments[userId].includes(courseId)) {
-                state.enrollments[userId].push(courseId);
+            if (
+                !state.enrollments.find(
+                    (enrollment) =>
+                        enrollment.userId === userId && enrollment.courseId === courseId
+                )
+            ) {
+                state.enrollments.push({ userId, courseId });
             }
         },
-        unenroll: (state, action: PayloadAction<{ userId: string; courseId: string }>) => {
+        unenroll: (
+            state,
+            action: PayloadAction<{ userId: string; courseId: string }>
+        ) => {
             const { userId, courseId } = action.payload;
-            if (state.enrollments[userId]) {
-                state.enrollments[userId] = state.enrollments[userId].filter(id => id !== courseId);
-            }
+            state.enrollments = state.enrollments.filter(
+                (enrollment) =>
+                    !(
+                        enrollment.userId === userId && enrollment.courseId === courseId
+                    )
+            );
         },
         resetEnrollments: (state) => {
-            state.enrollments = {};
-        }
+            state.enrollments = [];
+        },
     },
 });
 
