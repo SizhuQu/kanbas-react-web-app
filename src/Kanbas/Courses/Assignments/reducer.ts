@@ -17,7 +17,9 @@ const assignmentsSlice = createSlice({
             const index = state.assignments.findIndex(
                 (assignment: any) => assignment._id === action.payload._id
             );
-            if (index !== -1) state.assignments[index] = action.payload;
+            if (index !== -1) {
+                state.assignments[index] = action.payload;
+            }
         },
     },
 });
