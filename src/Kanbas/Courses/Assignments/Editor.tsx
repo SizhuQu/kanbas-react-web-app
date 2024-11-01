@@ -1,13 +1,48 @@
-import { useParams, Link } from "react-router-dom";
-import { assignments } from "../../Database";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { addAssignment, updateAssignment } from "./reducer";
 
-type AssignmentsProps = {
+type AssignmentEditorProps = {
   isFaculty: boolean;
 };
 
-export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
-  const { aid } = useParams();
-  const assignment = assignments.find((assignment) => assignment._id === aid);
+export default function AssignmentEditor({ isFaculty }: AssignmentEditorProps) {
+  const { aid, cid } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments || []);
+  const assignment = assignments.find((assignment: any) => assignment._id === aid);
+
+  const [title, setTitle] = useState(assignment ? assignment.title : "");
+  const [description, setDescription] = useState(assignment ? assignment.description : "");
+  const [points, setPoints] = useState(assignment ? assignment.points : 100);
+  const [dueDate, setDueDate] = useState(assignment ? assignment.dueDate : "2024-05-13T23:59");
+  const [availableFrom, setAvailableFrom] = useState(assignment ? assignment.availableFrom : "2024-05-06T00:00");
+  const [availableUntil, setAvailableUntil] = useState(assignment ? assignment.availableUntil : "2024-05-20T23:59");
+  
+
+  const handleSave = () => {
+    const newAssignment = {
+      _id: aid || new Date().toISOString(),
+      course: cid,
+      title,
+      description,
+      points,
+      dueDate,
+      availableFrom,
+      availableUntil,
+    };
+
+    if (aid) {
+      dispatch(updateAssignment(newAssignment));
+    } else {
+      dispatch(addAssignment(newAssignment));
+    }
+    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+  };
+
+  const handleCancel = () => navigate(`/Kanbas/Courses/${cid}/Assignments`);
 
   return (
     <div id="wd-assignments-editor" className="container mt-4">
@@ -17,8 +52,9 @@ export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
           <input
             id="wd-name"
             className="form-control"
-            value={assignment?.title || ''}
-            readOnly={!isFaculty} 
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            readOnly={!isFaculty}
           />
         </div>
       </div>
@@ -30,8 +66,9 @@ export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
             id="wd-description"
             className="form-control"
             rows={5}
-            value="The assignment is available online."
-            readOnly={!isFaculty} 
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            readOnly={!isFaculty}
           />
         </div>
       </div>
@@ -41,7 +78,14 @@ export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
           <label htmlFor="wd-points" className="form-label fw-bold">Points</label>
         </div>
         <div className="col-md-8">
-          <input id="wd-points" className="form-control" value={100} readOnly={!isFaculty} />
+          <input
+            id="wd-points"
+            className="form-control"
+            type="number"
+            value={points}
+            onChange={(e) => setPoints(Number(e.target.value))}
+            readOnly={!isFaculty}
+          />
         </div>
       </div>
 
@@ -82,7 +126,6 @@ export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
               <option>Online</option>
               <option>On Paper</option>
             </select>
-
             <fieldset className="border p-3">
               <legend className="fw-bold">Online Entry Options</legend>
               <div className="form-check">
@@ -110,6 +153,57 @@ export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
         </div>
       </div>
 
+      <div className="row mb-3">
+        <div className="col-md-2">
+          <label htmlFor="wd-assign-to" className="form-label fw-bold">Assign</label>
+        </div>
+        <div className="col-md-8">
+          <div className="border p-3">
+            <div className="row mb-3">
+              <div className="col-md-12">
+                <label htmlFor="wd-assign-to" className="form-label fw-bold">Assign to</label>
+                <input id="wd-assign-to" className="form-control" value="Everyone" readOnly={!isFaculty} />
+              </div>
+              <div className="col-md-12">
+                <label htmlFor="wd-due-date" className="form-label fw-bold">Due</label>
+                <input
+                  id="wd-due-date"
+                  type="datetime-local"
+                  className="form-control"
+                  value={dueDate}
+                  onChange={(e) => setDueDate(e.target.value)}
+                  readOnly={!isFaculty}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <label htmlFor="wd-available-from" className="form-label fw-bold">Available from</label>
+                <input
+                  id="wd-available-from"
+                  type="datetime-local"
+                  className="form-control"
+                  value={availableFrom}
+                  onChange={(e) => setAvailableFrom(e.target.value)}
+                  readOnly={!isFaculty}
+                />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="wd-available-until" className="form-label fw-bold">Until</label>
+                <input
+                  id="wd-available-until"
+                  type="datetime-local"
+                  className="form-control"
+                  value={availableUntil}
+                  onChange={(e) => setAvailableUntil(e.target.value)}
+                  readOnly={!isFaculty}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="d-flex justify-content-end mt-4">
         <Link
           to={`/Kanbas/Courses/${assignment?.course || ''}/Assignments`}
@@ -119,7 +213,7 @@ export default function AssignmentEditor({ isFaculty }: AssignmentsProps) {
           Cancel
         </Link>
         {isFaculty && (
-          <button id="wd-save" className="btn btn-danger">
+          <button id="wd-save" className="btn btn-danger" onClick={handleSave}>
             Save
           </button>
         )}

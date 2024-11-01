@@ -1,6 +1,8 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { FaPlus, FaCheckCircle, FaEllipsisV, FaBook, FaSearch, FaGripVertical } from "react-icons/fa";
-import { assignments } from "../../Database";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment } from "./reducer";
+import { useState } from "react";
 
 type AssignmentsProps = {
   isFaculty: boolean;
@@ -8,7 +10,23 @@ type AssignmentsProps = {
 
 export default function Assignments({ isFaculty }: AssignmentsProps) {
   const { cid } = useParams();
-  const filteredAssignments = assignments.filter((assignment) => assignment.course === cid);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments || []);
+
+  const filteredAssignments = assignments.filter((assignment: any) => assignment.course === cid);
+
+  const handleAddAssignment = () => {
+    if (isFaculty) {
+      navigate(`/Kanbas/Courses/${cid}/Assignments/new`);
+    }
+  };
+
+  const handleDeleteAssignment = (assignmentId: string) => {
+    if (isFaculty && window.confirm("Are you sure you want to delete this assignment?")) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
 
   return (
     <div id="wd-assignments" className="container">
@@ -24,13 +42,12 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
               placeholder="Search for Assignments"
             />
           </div>
-
           {isFaculty && (
             <div>
               <button id="wd-add-assignment-group" className="btn btn-secondary me-2">
                 + Group
               </button>
-              <button id="wd-add-assignment" className="btn btn-danger">
+              <button id="wd-add-assignment" className="btn btn-danger" onClick={handleAddAssignment}>
                 + Assignment
               </button>
             </div>
@@ -70,7 +87,7 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
         </div>
 
         <ul className="list-group list-group-flush">
-          {filteredAssignments.map((assignment) => (
+          {filteredAssignments.map((assignment: any) => (
             <li
               key={assignment._id}
               className="list-group-item d-flex align-items-center justify-content-between"
@@ -84,8 +101,7 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
                 <FaGripVertical className="me-2 text-secondary fs-4" />
                 <FaBook className="me-2 text-success fs-4" />
                 <div>
-                  <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                    className="fw-bold text-dark text-decoration-none">
+                  <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} className="fw-bold text-dark text-decoration-none">
                     {assignment.title}
                   </Link>
                   <p className="text-muted mb-0">
@@ -95,7 +111,14 @@ export default function Assignments({ isFaculty }: AssignmentsProps) {
               </div>
               <div className="d-flex align-items-center">
                 <FaCheckCircle className="text-success fs-5 me-2" />
-                <FaEllipsisV className="text-secondary fs-5" />
+                {isFaculty && (
+                  <button
+                    onClick={() => handleDeleteAssignment(assignment._id)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </li>
           ))}
