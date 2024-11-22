@@ -1,5 +1,6 @@
 import EnvironmentVariables from "./EnvironmentVariables";
 import PathParameters from "./PathParameters";
+import QueryParameters from "./QueryParameters";
 const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 export default function Lab5() {
     return (
@@ -12,6 +13,7 @@ export default function Lab5() {
             </div><hr />
             <EnvironmentVariables />
             <PathParameters />
+            <QueryParameters />
         </div>
     );
 }
