@@ -52,7 +52,7 @@ export default function Modules({ isFaculty }: ModulesProps) {
         <div className="col-12 d-flex justify-content-end align-items-center">
           {isFaculty && (
             <ModulesControls collapseAll={collapseAll} viewProgress={viewProgress}
-              setModuleName={setModuleName} moduleName={moduleName} addModule={() => { createModuleForCourse }} />
+              setModuleName={setModuleName} moduleName={moduleName} addModule={createModuleForCourse} />
           )}
         </div>
       </div>
