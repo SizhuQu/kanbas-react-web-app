@@ -1,36 +1,27 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as client from "./client";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
 
 export default function Signup() {
+  const [user, setUser] = useState<any>({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const signup = async () => {
+    const currentUser = await client.signup(user);
+    dispatch(setCurrentUser(currentUser));
+    navigate("/Kanbas/Account/Profile");
+  };
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-4 offset-md-3">
-          <h1 className="text-center">Sign up</h1>
-          <input
-            id="signup-username"
-            placeholder="username"
-            className="form-control mb-3"
-          />
-          <input
-            id="signup-password"
-            placeholder="password"
-            type="password"
-            className="form-control mb-3"
-          />
-          <Link
-            id="signup-btn"
-            to="/Account/Profile" 
-            className="btn btn-primary w-100 mb-3"
-          >
-            Signup
-          </Link>
-          <div className="text-center">
-            <Link id="signin-link" to="/Account/Signin">
-              Signin
-            </Link>
-          </div>
-        </div>
-      </div>
+    <div className="wd-signup-screen">
+      <h1>Sign up</h1>
+      <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })}
+        className="wd-username form-control mb-2" placeholder="username" />
+      <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} type="password"
+        className="wd-password form-control mb-2" placeholder="password" />
+      <button onClick={signup} className="wd-signup-btn btn btn-primary mb-2 w-100"> Sign up </button><br />
+      <Link to="/Kanbas/Account/Signin" className="wd-signin-link">Sign in</Link>
     </div>
   );
 }
