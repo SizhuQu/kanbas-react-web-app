@@ -5,6 +5,7 @@ import { FaPencil } from "react-icons/fa6";
 import { TiDelete } from "react-icons/ti";
 import * as client from "./client";
 export default function WorkingWithArraysAsynchronously() {
+    const [errorMessage, setErrorMessage] = useState(null);
     const [todos, setTodos] = useState<any[]>([]);
     const editTodo = (todo: any) => {
         const updatedTodos = todos.map(
@@ -12,9 +13,13 @@ export default function WorkingWithArraysAsynchronously() {
         setTodos(updatedTodos);
     };
     const updateTodo = async (todo: any) => {
-        await client.updateTodo(todo);
-        setTodos(todos.map((t) => (t.id === todo.id ? todo : t)));
-    };
+        try {
+            await client.updateTodo(todo);
+            setTodos(todos.map((t) => (t.id === todo.id ? todo : t)));
+        } catch (error: any) {
+            setErrorMessage(error.response.data.message);
+        }
+    }
 
     const fetchTodos = async () => {
         const todos = await client.fetchTodos();
@@ -39,10 +44,17 @@ export default function WorkingWithArraysAsynchronously() {
     };
 
     const deleteTodo = async (todo: any) => {
-        await client.deleteTodo(todo);
-        const newTodos = todos.filter((t) => t.id !== todo.id);
-        setTodos(newTodos);
+        try {
+            await client.deleteTodo(todo);
+            const newTodos = todos.filter((t) => t.id !== todo.id);
+            setTodos(newTodos);
+        }
+        catch (error: any) {
+            console.log(error);
+            setErrorMessage(error.response.data.message);
+        }
     };
+
 
     useEffect(() => {
         fetchTodos();
@@ -50,6 +62,8 @@ export default function WorkingWithArraysAsynchronously() {
     return (
         <div id="wd-asynchronous-arrays">
             <h3>Working with Arrays Asynchronously</h3>
+            {errorMessage && (<div id="wd-todo-error-message" className="alert alert-danger mb-2 mt-2">{errorMessage}</div>)}
+
             <h4>Todos</h4>
             <FaPlusCircle
                 onClick={createTodo}
