@@ -65,7 +65,7 @@ export default function TOC() {
         className="nav-item">
         <a
           id="wd-github"
-          href=""
+          href="https://github.com/SizhuQu/kanbas-react-web-app/tree/A5"
           target="_blank"
           rel="noopener noreferrer"
           className="nav-link">
