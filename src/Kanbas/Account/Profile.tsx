@@ -8,6 +8,7 @@ import * as client from "./client";
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
@@ -29,7 +30,8 @@ export default function Profile() {
     dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
-  useEffect(() => { fetchProfile(); }, []);
+  useEffect(() => { 
+    fetchProfile(); }, [fetchProfile]);
   return (
     <div className="wd-profile-screen">
       <h3>Profile</h3>
