@@ -37,7 +37,7 @@ export default function Kanbas() {
     setCourses([...courses, newCourse, { ...course, _id: new Date().getTime().toString() }]);
   };
   const deleteCourse = async (courseId: string) => {
-    const status = await courseClient.deleteCourse(courseId);
+    await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };
   const updateCourse = async () => {
