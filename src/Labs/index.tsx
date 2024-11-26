@@ -8,8 +8,6 @@ import Lab5 from "./Lab5";
 import store from "./store";
 import { Provider } from "react-redux";
 
-
-
 export default function Labs() {
   return (
     <Provider store={store}>

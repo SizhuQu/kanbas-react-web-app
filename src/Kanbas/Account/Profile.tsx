@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
 import React, { useCallback } from "react";
 import * as client from "./client";
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   const updateProfile = async () => {
     const updatedProfile = await client.updateUser(profile);
     dispatch(setCurrentUser(updatedProfile));
@@ -21,6 +23,7 @@ export default function Profile() {
       setProfile(currentUser);
     }
   }, [currentUser, navigate]);
+
   const signout = async () => {
     await client.signout();
     dispatch(setCurrentUser(null));
