@@ -36,10 +36,17 @@ export default function Kanbas() {
     const newCourse = await userClient.createCourse(course);
     setCourses([...courses, newCourse, { ...course, _id: new Date().getTime().toString() }]);
   };
+
   const deleteCourse = async (courseId: string) => {
-    await courseClient.deleteCourse(courseId);
+    const status = await courseClient.deleteCourse(courseId);
+    if (status === 200) {
+      console.log('Course deleted successfully.');
+    } else {
+      console.error(`Failed to delete course. Status: ${status}`);
+    }
     setCourses(courses.filter((course) => course._id !== courseId));
   };
+
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
     setCourses(courses.map((c) => {
@@ -66,7 +73,8 @@ export default function Kanbas() {
                 setCourse={setCourse}
                 addNewCourse={addNewCourse}
                 deleteCourse={deleteCourse}
-                updateCourse={updateCourse} /></ProtectedRoute>} />
+                updateCourse={updateCourse}
+              /></ProtectedRoute>} />
               <Route path="/Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
               <Route path="/Calendar" element={<h1>Calendar</h1>} />
               <Route path="/Inbox" element={<h1>Inbox</h1>} />

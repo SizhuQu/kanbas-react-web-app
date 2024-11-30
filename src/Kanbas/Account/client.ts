@@ -1,5 +1,6 @@
 import axios from "axios";
 const axiosWithCredentials = axios.create({ withCredentials: true });
+
 export const findMyCourses = async () => {
     const { data } = await axiosWithCredentials.get(`${USERS_API}/current/courses`);
     return data;
@@ -31,3 +32,4 @@ export const createCourse = async (course: any) => {
     const { data } = await axiosWithCredentials.post(`${USERS_API}/current/courses`, course);
     return data;
 };
+
