@@ -3,37 +3,38 @@ import { useSelector } from "react-redux";
 
 export default function AccountNavigation() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  // eslint-disable-next-line
   const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
-  // eslint-disable-next-line
+  const active = (path: string) => (pathname.includes(path) ? "active" : "");
   const { pathname } = useLocation();
 
   return (
     <div className="col-md-2 p-3">
-      <ul className="nav flex-column">
-        <li className="nav-item">
-          <Link to="/Account/Signin" className="nav-link fs-5 text-dark">
-            <strong>Signin</strong>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/Account/Signup" className="nav-link fs-5 text-danger">
-            Signup
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/Account/Profile" className="nav-link fs-5 text-danger">
-            Profile
-          </Link>
-        </li>
+      {links.map((link) => (
+        <Link key={link}
+          to={`/Kanbas/Account/${link}`}
+          className={`list-group-item ${active(link)}`}>
+          {link}
+        </Link>
+      ))}
 
-        <li className="nav-item">
-          <Link to="/Kanbas" className="nav-link fs-5 text-danger">
-            Kanbas
-          </Link>
+      <Link to="/Account/Signin"
+        className="nav-link fs-5 text-dark">
+        <strong>Signin</strong>
+      </Link>
+      
+      <Link to="/Account/Signup" className="nav-link fs-5 text-danger">
+        Signup
+      </Link>
 
-        </li>
-      </ul>
-    </div>
+      <Link to="/Account/Profile" className="nav-link fs-5 text-danger">
+        Profile
+      </Link>
+
+      <Link to="/Kanbas" className="nav-link fs-5 text-danger">
+        Kanbas
+      </Link>
+      {currentUser && currentUser.role === "ADMIN" && (
+        <Link to={`/Kanbas/Account/Users`} className={`list-group-item ${active("Users")}`}> Users </Link>)}
+    </div >
   );
 }
