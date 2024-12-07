@@ -12,6 +12,7 @@ import * as modulesClient from "./client";
 type ModulesProps = {
   isFaculty: boolean;
 };
+
 export default function Modules({ isFaculty }: ModulesProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const collapseAll = () => setIsCollapsed(!isCollapsed);
@@ -26,24 +27,24 @@ export default function Modules({ isFaculty }: ModulesProps) {
   };
   useEffect(() => {
     fetchModules();
-  }, []);
+  });
+
   const createModuleForCourse = async () => {
     if (!cid) return;
     const newModule = { name: moduleName, course: cid };
     const module = await coursesClient.createModuleForCourse(cid, newModule);
     dispatch(addModule(module));
   };
+
   const removeModule = async (moduleId: string) => {
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
+
   const saveModule = async (module: any) => {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
-
-
-
 
 
   return (
@@ -77,8 +78,10 @@ export default function Modules({ isFaculty }: ModulesProps) {
               )}
 
               {isFaculty && (
-                <ModuleControlButtons moduleId={module._id} deleteModule={(moduleId) => removeModule(moduleId)}
-                  editModule={(moduleId) => dispatch(editModule(moduleId))} isFaculty={isFaculty} />
+                <ModuleControlButtons moduleId={module._id}
+                  deleteModule={(moduleId) => removeModule(moduleId)}
+                  editModule={(moduleId) => dispatch(editModule(moduleId))}
+                  isFaculty={isFaculty} />
               )}
             </div>
 
