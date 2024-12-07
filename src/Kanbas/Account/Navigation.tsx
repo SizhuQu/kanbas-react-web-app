@@ -8,7 +8,7 @@ export default function AccountNavigation() {
   const { pathname } = useLocation();
 
   return (
-    <div className="col-md-2 p-3">
+    <div className="col-md-2 p-3 nav-link fs-5 text-danger">
       {links.map((link) => (
         <Link key={link}
           to={`/Kanbas/Account/${link}`}
@@ -16,15 +16,6 @@ export default function AccountNavigation() {
           {link}
         </Link>
       ))}
-
-      <Link to="/Account/Signin"
-        className="nav-link fs-5 text-dark">
-        <strong>Signin</strong>
-      </Link>
-      
-      <Link to="/Account/Signup" className="nav-link fs-5 text-danger">
-        Signup
-      </Link>
 
       <Link to="/Account/Profile" className="nav-link fs-5 text-danger">
         Profile
