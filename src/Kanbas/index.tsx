@@ -14,20 +14,22 @@ import { Provider, useSelector } from "react-redux";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
+import { useCallback } from "react";
 
 export default function Kanbas() {
   const [courses, setCourses] = useState<any[]>([]);
   const [course, setCourse] = useState<any>(null);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [enrolling, setEnrolling] = useState<boolean>(false);
-  const findCoursesForUser = async () => {
+  const findCoursesForUser = useCallback(async () => {
     try {
       const courses = await userClient.findCoursesForUser(currentUser._id);
       setCourses(courses);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [currentUser._id]);
+
   const updateEnrollment = async (courseId: string, enrolled: boolean) => {
     if (enrolled) {
       await userClient.enrollIntoCourse(currentUser._id, courseId);
@@ -45,12 +47,10 @@ export default function Kanbas() {
     );
   };
 
-  const fetchCourses = async () => {
+  const fetchCourses = useCallback(async () => {
     try {
       const allCourses = await courseClient.fetchAllCourses();
-      const enrolledCourses = await userClient.findCoursesForUser(
-        currentUser._id
-      );
+      const enrolledCourses = await userClient.findCoursesForUser(currentUser._id);
       const courses = allCourses.map((course: any) => {
         if (enrolledCourses.find((c: any) => c._id === course._id)) {
           return { ...course, enrolled: true };
@@ -62,14 +62,15 @@ export default function Kanbas() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [currentUser._id]);
+
   useEffect(() => {
     if (enrolling) {
       fetchCourses();
     } else {
       findCoursesForUser();
     }
-  }, [currentUser, enrolling]);
+  }, [currentUser, enrolling, fetchCourses, findCoursesForUser]);
 
   const addNewCourse = async () => {
     const newCourse = await courseClient.createCourse(course);
@@ -77,6 +78,7 @@ export default function Kanbas() {
   };
 
   const deleteCourse = async (courseId: string) => {
+    // eslint-disable-next-line
     const status = await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };

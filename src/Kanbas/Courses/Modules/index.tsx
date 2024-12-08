@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ModulesControls from "./ModulesControls";
 import ModuleControlButtons from "./ModuleControlButtons";
 import LessonControlButtons from "./LessonControlButtons";
@@ -20,15 +20,23 @@ export default function Modules({ isFaculty }: ModulesProps) {
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: any) => state.modulesReducer);
   const dispatch = useDispatch();
-  const fetchModules = async () => {
+  const fetchModules = useCallback(async () => {
+    if (!cid) {
+      return;
+    }
     const modules = await coursesClient.findModulesForCourse(cid as string);
     dispatch(setModules(modules));
-  };
+  }, [cid, dispatch]);
+
+
   useEffect(() => {
     fetchModules();
   }, [fetchModules]);
+
   const createModuleForCourse = async () => {
-    if (!cid) return;
+    if (!cid) {
+      return;
+    }
     const newModule = { name: moduleName, course: cid };
     const module = await coursesClient.createModuleForCourse(cid, newModule);
     dispatch(addModule(module));

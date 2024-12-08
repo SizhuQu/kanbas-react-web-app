@@ -25,6 +25,7 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
     dispatch(enroll({ userId: currentUser._id, courseId }));
     setEnrolledCourses((prev) => [...prev, courseId]);
   };
+
   const handleUnenroll = (courseId: string) => {
     dispatch(unenroll({ userId: currentUser._id, courseId }));
     setEnrolledCourses((prev) => prev.filter((id) => id !== courseId));

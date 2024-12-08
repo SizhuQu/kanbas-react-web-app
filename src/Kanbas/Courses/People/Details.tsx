@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { useParams, useNavigate } from "react-router";
 import { FaPencil } from "react-icons/fa6";
@@ -13,11 +13,14 @@ export default function PeopleDetails() {
         navigate(-1);
     };
 
-    const fetchUser = async () => {
-        if (!uid) return;
+    const fetchUser = useCallback(async () => {
+        if (!uid) {
+            return;
+        }
         const user = await client.findUserById(uid);
         setUser(user);
-    };
+    }, [uid]);
+
 
     const [name, setName] = useState("");
     const [editing, setEditing] = useState(false);
@@ -32,12 +35,9 @@ export default function PeopleDetails() {
 
 
     useEffect(() => {
-        if (uid) fetchUser();
-    }, [uid]);
+        fetchUser();
+    }, [fetchUser]);
 
-    if (!uid) 
-        return null;
-    
     return (
         <div className="wd-people-details position-fixed top-0 end-0 bottom-0 bg-white p-4 shadow w-25">
             <button onClick={() => navigate(-1)} className="btn position-fixed end-0 top-0 wd-close-details">
@@ -69,7 +69,7 @@ export default function PeopleDetails() {
             <b>Section:</b>         <span className="wd-section">       {user.section}      </span> <br />
             <b>Total Activity:</b>  <span className="wd-total-activity">{user.totalActivity}</span>
             <hr />
-            <button onClick={() => deleteUser(uid)} className="btn btn-danger float-end wd-delete" >
+            <button onClick={() => uid && deleteUser(uid)} className="btn btn-danger float-end wd-delete" >
                 Delete
             </button>
             <button onClick={() => navigate(-1)}
