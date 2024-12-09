@@ -65,11 +65,11 @@ export default function TOC() {
         className="nav-item">
         <a
           id="wd-github"
-          href="https://github.com/SizhuQu/kanbas-react-web-app/tree/A5"
+          href="https://github.com/SizhuQu/kanbas-react-web-app/tree/A6"
           target="_blank"
           rel="noopener noreferrer"
           className="nav-link">
-          My GitHub React Repository A5
+          My GitHub React Repository A6
         </a>
       </li>
       <li
