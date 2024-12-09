@@ -64,7 +64,6 @@ export default function Kanbas() {
       })
     );
   };
-
   const fetchCourses = async () => {
     try {
       const allCourses = await courseClient.fetchAllCourses();
@@ -101,12 +100,25 @@ export default function Kanbas() {
               <Route path="/" element={<Navigate to="Dashboard" />} />
               <Route path="/Account/*" element={<Account />} />
               <ProtectedRoute>
-                <Dashboard courses={courses} course={course} setCourse={setCourse} addNewCourse={addNewCourse}
-                  deleteCourse={deleteCourse} updateCourse={updateCourse} enrolling={enrolling} setEnrolling={setEnrolling}
+                <Dashboard
+                  courses={courses}
+                  course={course}
+                  setCourse={setCourse}
+                  addNewCourse={addNewCourse}
+                  deleteCourse={deleteCourse}
+                  updateCourse={updateCourse}
+                  enrolling={enrolling}
+                  setEnrolling={setEnrolling}
                   updateEnrollment={updateEnrollment}
                 />
               </ProtectedRoute>
-              <Route path="/Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
+              <Route
+                path="/Courses/:cid/*"
+                element={
+                  <ProtectedRoute>
+                    <Courses courses={courses} />
+                  </ProtectedRoute>
+                } />
               <Route path="/Calendar" element={<h1>Calendar</h1>} />
               <Route path="/Inbox" element={<h1>Inbox</h1>} />
               <Route path="/Labs" element={<Labs />} />
