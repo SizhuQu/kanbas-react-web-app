@@ -7,7 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import Labs from "../Labs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import store from "./store";
 import { Provider, useSelector } from "react-redux";
 import ProtectedRoute from "./Account/ProtectedRoute";
@@ -40,14 +40,14 @@ export default function Kanbas() {
       } else { return c; }
     }));
   };
-  const findCoursesForUser = async () => {
+  const findCoursesForUser = useCallback(async () => {
     try {
       const courses = await userClient.findCoursesForUser(currentUser._id);
       setCourses(courses);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [currentUser]);
   const updateEnrollment = async (courseId: string, enrolled: boolean) => {
     if (enrolled) {
       await userClient.enrollIntoCourse(currentUser._id, courseId);
@@ -64,7 +64,7 @@ export default function Kanbas() {
       })
     );
   };
-  const fetchCourses = async () => {
+  const fetchCourses = useCallback(async () => {
     try {
       const allCourses = await courseClient.fetchAllCourses();
       const enrolledCourses = await userClient.findCoursesForUser(
@@ -81,14 +81,14 @@ export default function Kanbas() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [currentUser]);
   useEffect(() => {
     if (enrolling) {
       fetchCourses();
     } else {
       findCoursesForUser();
     }
-  }, [currentUser, enrolling]);
+  }, [currentUser, enrolling, fetchCourses, findCoursesForUser]);
 
   return (
     <Provider store={store}>
@@ -108,7 +108,7 @@ export default function Kanbas() {
                 updateCourse={updateCourse}
                 enrolling={enrolling}
                 setEnrolling={setEnrolling}
-                updateEnrollment={updateEnrollment}/></ProtectedRoute>} />
+                updateEnrollment={updateEnrollment} /></ProtectedRoute>} />
               <Route path="/Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
               <Route path="/Calendar" element={<h1>Calendar</h1>} />
               <Route path="/Inbox" element={<h1>Inbox</h1>} />
