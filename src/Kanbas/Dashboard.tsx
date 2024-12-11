@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { enroll, unenroll } from "./Enrollment/reducer";
 
-export default function Dashboard({ courses, course, setCourse, addNewCourse, 
+export default function Dashboard({ courses, course, setCourse, addNewCourse,
   deleteCourse, updateCourse, enrolling, setEnrolling, updateEnrollment }: {
     courses: any[]; course: any; setCourse: (course: any) => void;
     addNewCourse: () => void; deleteCourse: (course: any) => void;
     updateCourse: () => void; enrolling: boolean; setEnrolling: (enrolling: boolean) => void;
-    updateEnrollment: (courseId: string, enrolled: boolean) => void 
+    updateEnrollment: (courseId: string, enrolled: boolean) => void
   }) {
 
   const dispatch = useDispatch();
@@ -81,10 +81,10 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse,
                     <div className="card-body">
                       <h5 className="wd-dashboard-course-title card-title">
                         {enrolling && (
-                          <button  onClick={(event) => {
+                          <button onClick={(event) => {
                             event.preventDefault();
                             updateEnrollment(course._id, !course.enrolled);
-                          }}className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
+                          }} className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
                             {course.enrolled ? "Unenroll" : "Enroll"}
                           </button>
                         )}

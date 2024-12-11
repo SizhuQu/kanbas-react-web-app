@@ -27,20 +27,20 @@ export default function Modules({ isFaculty }: ModulesProps) {
   };
   useEffect(() => {
     fetchModules();
-  });
-
+    // eslint-disable-next-line
+  },[]);
   const createModuleForCourse = async () => {
-    if (!cid) return;
+    if (!cid) {
+      return;
+    }
     const newModule = { name: moduleName, course: cid };
     const module = await coursesClient.createModuleForCourse(cid, newModule);
     dispatch(addModule(module));
   };
-
   const removeModule = async (moduleId: string) => {
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
-
   const saveModule = async (module: any) => {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
