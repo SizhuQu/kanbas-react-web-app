@@ -21,17 +21,15 @@ export default function Kanbas() {
 
   const fetchCourses = async () => {
     try {
-      const courses = await userClient.findMyCourses();
+      const courses = await courseClient.fetchAllCourses();
       setCourses(courses);
     } catch (error) {
       console.error(error);
     }
   };
-
   useEffect(() => {
     fetchCourses();
   }, [currentUser]);
-
 
   const [course, setCourse] = useState<any>({
     _id: "1234", name: "New Course", number: "New Number",
@@ -39,23 +37,30 @@ export default function Kanbas() {
   });
 
   const addNewCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
+    const newCourse = await courseClient.createCourse(course);
     setCourses([...courses, newCourse]);
   };
 
   const deleteCourse = async (courseId: string) => {
-    // eslint-disable-next-line
+    // eslint-disable-next-line 
     const status = await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };
+
 
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
     setCourses(courses.map((c) => {
       if (c._id === course._id) {
         return course;
-      } else {return c;}
+      } else { return c; }
     }));
+  };
+
+  const [enrolling, setEnrolling] = useState<boolean>(false);
+
+  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
+    // Implement the logic to update enrollment
   };
 
   return (
@@ -73,7 +78,10 @@ export default function Kanbas() {
                 setCourse={setCourse}
                 addNewCourse={addNewCourse}
                 deleteCourse={deleteCourse}
-                updateCourse={updateCourse} /></ProtectedRoute>} />
+                updateCourse={updateCourse}
+                enrolling={enrolling}
+                setEnrolling={setEnrolling}
+                updateEnrollment={updateEnrollment} /></ProtectedRoute>} />
               <Route path="/Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
               <Route path="/Calendar" element={<h1>Calendar</h1>} />
               <Route path="/Inbox" element={<h1>Inbox</h1>} />
